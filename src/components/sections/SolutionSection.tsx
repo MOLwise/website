@@ -17,7 +17,7 @@ export function SolutionSection() {
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {solutions.map((solution, index) => (
             <Card key={solution.title} className="relative overflow-hidden">
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-soft text-brand">
                 <CheckCircle2 className="h-6 w-6" />
               </div>
 

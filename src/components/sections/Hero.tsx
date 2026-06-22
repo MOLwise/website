@@ -4,13 +4,13 @@ import { Container } from "@/components/ui/Container";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-violet-50 py-24 sm:py-32">
-      <div className="absolute left-1/2 top-20 -z-0 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-200/40 blur-3xl" />
-      <div className="absolute right-10 top-40 -z-0 h-72 w-72 rounded-full bg-violet-200/40 blur-3xl" />
+    <section className="relative overflow-hidden bg-gradient-to-br from-white via-brand-soft to-brand-muted py-24 sm:py-32">
+      <div className="absolute left-1/2 top-20 -z-0 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-muted blur-3xl" />
+      <div className="absolute right-10 top-40 -z-0 h-72 w-72 rounded-full bg-brand-soft blur-3xl" />
 
       <Container className="relative z-10 grid items-center gap-14 lg:grid-cols-2">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/70 px-4 py-2 text-sm font-medium text-blue-700 shadow-sm backdrop-blur">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-soft bg-white/70 px-4 py-2 text-sm font-medium text-brand-dark shadow-sm backdrop-blur">
             <Sparkles className="h-4 w-4" />
             MOLwise Platform
           </div>
@@ -41,8 +41,10 @@ export function Hero() {
             <div className="rounded-[1.5rem] border border-slate-200 bg-slate-950 p-6 text-white">
               <div className="mb-8 flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-blue-200">MOLwise Insight Panel</p>
-                  <h3 className="mt-1 text-xl font-semibold">Candidate Overview</h3>
+                  <p className="text-sm text-cyan-200">MOLwise Insight Panel</p>
+                  <h3 className="mt-1 text-xl font-semibold">
+                    Candidate Overview
+                  </h3>
                 </div>
                 <div className="rounded-full bg-emerald-400/20 px-3 py-1 text-xs text-emerald-200">
                   Active
@@ -66,7 +68,7 @@ export function Hero() {
                 ))}
               </div>
 
-              <div className="mt-6 rounded-2xl border border-white/10 bg-gradient-to-r from-blue-500/20 to-violet-500/20 p-4">
+              <div className="mt-6 rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-500/20 to-sky-500/20 p-4">
                 <p className="text-sm text-slate-300">Workflow stage</p>
                 <p className="mt-2 font-medium">
                   Computational screening → Candidate prioritization

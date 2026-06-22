@@ -25,7 +25,7 @@ export function PublicationsPreview() {
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {publications.map((publication) => (
             <Card key={publication.title}>
-              <p className="text-sm font-semibold text-blue-600">
+              <p className="text-sm font-semibold text-brand">
                 {publication.year}
               </p>
 

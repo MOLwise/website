@@ -2,25 +2,55 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
+  --foreground: #0f172a;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --brand: #0891b2;
+  --brand-dark: #164e63;
+  --brand-soft: #ecfeff;
+  --brand-muted: #e0f2fe;
+  --brand-border: #a5f3fc;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@utility bg-brand {
+  background-color: var(--brand);
+}
+
+@utility text-brand {
+  color: var(--brand);
+}
+
+@utility text-brand-dark {
+  color: var(--brand-dark);
+}
+
+@utility bg-brand-soft {
+  background-color: var(--brand-soft);
+}
+
+@utility bg-brand-muted {
+  background-color: var(--brand-muted);
+}
+
+@utility border-brand-soft {
+  border-color: var(--brand-border);
+}
+
+@utility from-brand-soft {
+  --tw-gradient-from: var(--brand-soft) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(236 254 255 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+@utility via-brand-muted {
+  --tw-gradient-to: rgb(224 242 254 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--brand-muted) var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+@utility to-brand-muted {
+  --tw-gradient-to: var(--brand-muted) var(--tw-gradient-to-position);
 }

@@ -15,7 +15,7 @@ export function AboutPreview() {
             />
           </div>
 
-          <div className="rounded-[2rem] border border-slate-200 bg-gradient-to-br from-blue-50 to-violet-50 p-8">
+          <div className="rounded-[2rem] border border-slate-200 bg-gradient-to-br from-brand-soft to-brand-muted p-8">
             <div className="grid gap-4 sm:grid-cols-2">
               {[
                 "Scientific discovery",

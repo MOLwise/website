@@ -22,8 +22,8 @@ export function TechnologySection() {
 
             return (
               <Card key={technology.title} className="flex gap-5">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-50 text-violet-600">
-                  <Icon className="h-6 w-6" />
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-soft text-brand">
+                    <Icon className="h-6 w-6" />
                 </div>
 
                 <div>

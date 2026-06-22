@@ -7,7 +7,7 @@ export function CTASection() {
     <section id="contact" className="bg-slate-950 py-24 text-white">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-blue-200">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
             Connect
           </p>
 

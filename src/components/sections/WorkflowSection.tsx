@@ -12,7 +12,7 @@ const workflowSteps = [
 
 export function WorkflowSection() {
   return (
-    <section className="overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 py-24 text-white">
+    <section className="overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 py-24 text-white">
       <Container>
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <SectionHeading
@@ -31,12 +31,12 @@ export function WorkflowSection() {
                   className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/10 p-4"
                 >
                   <div>
-                    <p className="text-sm text-blue-200">0{index + 1}</p>
+                    <p className="text-sm text-cyan-200">0{index + 1}</p>
                     <p className="mt-1 font-semibold">{step}</p>
                   </div>
 
                   {index < workflowSteps.length - 1 && (
-                    <ArrowRight className="h-5 w-5 text-blue-200" />
+                    <ArrowRight className="h-5 w-5 text-cyan-200" />
                   )}
                 </div>
               ))}
