@@ -64,9 +64,8 @@ export function UseCasesSection() {
         <FadeIn delay={0.15}>
           <div className="mt-10 rounded-[2rem] border border-cyan-100 bg-gradient-to-r from-white via-brand-soft to-white p-6 text-center">
             <p className="mx-auto max-w-3xl text-lg leading-8 text-slate-700">
-              These use cases are placeholders for the first design version.
-              Later, each solution area can become its own page or editable CMS
-              entry.
+              As the platform evolves, each solution area can expand into a dedicated
+              workflow for research, diagnostics, or molecular discovery teams.
             </p>
           </div>
         </FadeIn>

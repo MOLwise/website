@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Dna, LineChart, MousePointerClick } from "lucide-react";
+import { Brain, Dna, LineChart } from "lucide-react";
 
 const steps = [
   {

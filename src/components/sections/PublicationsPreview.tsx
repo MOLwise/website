@@ -26,11 +26,11 @@ export function PublicationsPreview() {
 
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.25em] text-brand">
-                    CMS ready
+                    Research library
                   </p>
                   <p className="mt-3 leading-7 text-slate-600">
-                    Later, admins can add new publications through Sanity
-                    without editing the website code.
+                    This section highlights research outputs, scientific updates, and future
+                    validation work related to MOLwise.
                   </p>
                 </div>
               </div>

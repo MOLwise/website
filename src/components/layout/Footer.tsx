@@ -77,7 +77,7 @@ export function Footer() {
           <p>© 2026 MOLwise. All rights reserved.</p>
 
           <p>
-            Built as a modern scientific startup website with CMS-ready content.
+            Intelligent molecular discovery for modern research teams.
           </p>
         </div>
       </Container>
