@@ -1,5 +1,4 @@
 import { ArrowRight, BookOpen, FileText } from "lucide-react";
-import { publications as fallbackPublications } from "@/data/homepage";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -17,16 +16,6 @@ type Publication = {
   featured?: boolean;
 };
 
-const normalizedFallbackPublications: Publication[] = fallbackPublications.map(
-  (publication) => ({
-    ...publication,
-    description: "",
-    publicationUrl: "",
-    pdfUrl: "",
-    featured: false,
-  }),
-);
-
 type PublicationsPreviewProps = {
   publications?: Publication[];
 };
@@ -34,10 +23,8 @@ type PublicationsPreviewProps = {
 export function PublicationsPreview({
   publications,
 }: PublicationsPreviewProps) {
-  const displayedPublications =
-    publications && publications.length > 0
-      ? publications
-      : normalizedFallbackPublications;
+  const displayedPublications: Publication[] = publications ?? [];
+
   return (
     <section id="publications" className="bg-slate-50 py-24">
       <Container>
@@ -76,65 +63,87 @@ export function PublicationsPreview({
           </FadeIn>
 
           <div className="space-y-5">
-            {displayedPublications.map((publication, index) => {
-              const href =
-                publication.publicationUrl || publication.pdfUrl || "#contact";
+            {displayedPublications.length === 0 ? (
+              <FadeIn>
+                <article className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+                  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-cyan-50 px-3 py-1 text-xs font-semibold text-brand-dark">
+                    <FileText className="h-3.5 w-3.5" />
+                    Publication
+                  </div>
 
-              return (
-                <FadeIn
-                  key={publication._id ?? publication.title}
-                  delay={index * 0.08}
-                >
-                  <article className="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-xl hover:shadow-cyan-950/10">
-                    <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-brand-soft opacity-0 blur-2xl transition duration-300 group-hover:opacity-100" />
+                  <h3 className="text-xl font-semibold leading-7 text-slate-950">
+                    Publications coming soon
+                  </h3>
 
-                    <div className="relative flex flex-col gap-5 sm:flex-row">
-                      <div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-slate-950 text-white transition duration-300 group-hover:bg-brand">
-                        <span className="text-xs font-semibold">YEAR</span>
-                        <span className="text-lg font-bold">
-                          {publication.year}
-                        </span>
-                      </div>
+                  <p className="mt-4 leading-7 text-slate-600">
+                    Research outputs and scientific updates will appear here
+                    once they are published by the MOLwise team.
+                  </p>
+                </article>
+              </FadeIn>
+            ) : (
+              displayedPublications.map((publication, index) => {
+                const href =
+                  publication.publicationUrl ||
+                  publication.pdfUrl ||
+                  "#contact";
 
-                      <div className="flex-1">
-                        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-cyan-50 px-3 py-1 text-xs font-semibold text-brand-dark">
-                          <FileText className="h-3.5 w-3.5" />
-                          Publication
+                return (
+                  <FadeIn
+                    key={publication._id ?? `${publication.title}-${index}`}
+                    delay={index * 0.08}
+                  >
+                    <article className="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-xl hover:shadow-cyan-950/10">
+                      <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-brand-soft opacity-0 blur-2xl transition duration-300 group-hover:opacity-100" />
+
+                      <div className="relative flex flex-col gap-5 sm:flex-row">
+                        <div className="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-slate-950 text-white transition duration-300 group-hover:bg-brand">
+                          <span className="text-xs font-semibold">YEAR</span>
+                          <span className="text-lg font-bold">
+                            {publication.year}
+                          </span>
                         </div>
 
-                        <h3 className="text-xl font-semibold leading-7 text-slate-950">
-                          {publication.title}
-                        </h3>
+                        <div className="flex-1">
+                          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-cyan-50 px-3 py-1 text-xs font-semibold text-brand-dark">
+                            <FileText className="h-3.5 w-3.5" />
+                            Publication
+                          </div>
 
-                        <p className="mt-3 text-sm text-slate-500">
-                          {publication.authors}
-                        </p>
+                          <h3 className="text-xl font-semibold leading-7 text-slate-950">
+                            {publication.title}
+                          </h3>
 
-                        {publication.venue && (
-                          <p className="mt-1 text-sm text-slate-500">
-                            {publication.venue}
+                          <p className="mt-3 text-sm text-slate-500">
+                            {publication.authors}
                           </p>
-                        )}
 
-                        {publication.description && (
-                          <p className="mt-4 leading-7 text-slate-600">
-                            {publication.description}
-                          </p>
-                        )}
+                          {publication.venue && (
+                            <p className="mt-1 text-sm text-slate-500">
+                              {publication.venue}
+                            </p>
+                          )}
 
-                        <a
-                          href={href}
-                          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand"
-                        >
-                          Read more
-                          <ArrowRight className="h-4 w-4 transition duration-300 group-hover:translate-x-1" />
-                        </a>
+                          {publication.description && (
+                            <p className="mt-4 leading-7 text-slate-600">
+                              {publication.description}
+                            </p>
+                          )}
+
+                          <a
+                            href={href}
+                            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand"
+                          >
+                            Read more
+                            <ArrowRight className="h-4 w-4 transition duration-300 group-hover:translate-x-1" />
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                </FadeIn>
-              );
-            })}
+                    </article>
+                  </FadeIn>
+                );
+              })
+            )}
           </div>
         </div>
       </Container>
