@@ -17,6 +17,16 @@ type Publication = {
   featured?: boolean;
 };
 
+const normalizedFallbackPublications: Publication[] = fallbackPublications.map(
+  (publication) => ({
+    ...publication,
+    description: "",
+    publicationUrl: "",
+    pdfUrl: "",
+    featured: false,
+  }),
+);
+
 type PublicationsPreviewProps = {
   publications?: Publication[];
 };
@@ -25,8 +35,9 @@ export function PublicationsPreview({
   publications,
 }: PublicationsPreviewProps) {
   const displayedPublications =
-    publications && publications.length > 0 ? publications : fallbackPublications;
-
+    publications && publications.length > 0
+      ? publications
+      : normalizedFallbackPublications;
   return (
     <section id="publications" className="bg-slate-50 py-24">
       <Container>
