@@ -1,86 +1,107 @@
-import { Atom, BrainCircuit, Layers3, Users } from "lucide-react";
+import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-const principles = [
+type AboutPrinciple = {
+  title?: string;
+  description?: string;
+};
+
+type AboutSectionContent = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  principles?: AboutPrinciple[];
+  closingText?: string;
+};
+
+type AboutPreviewProps = {
+  content?: AboutSectionContent;
+};
+
+const fallbackContent = {
+  eyebrow: "About MOLwise",
+  title: "A research-focused platform for molecular intelligence.",
+  description:
+    "MOLwise is being developed to support scientific teams working with molecular data, AI-assisted analysis, and discovery workflows.",
+  closingText:
+    "The goal is to help research teams move through discovery with more clarity, better organization, and stronger decision support.",
+};
+
+const fallbackPrinciples: AboutPrinciple[] = [
   {
     title: "Molecular science",
     description:
-      "Grounded in biological and molecular discovery workflows.",
-    Icon: Atom,
+      "Designed around workflows where molecular information, candidate evidence, and scientific interpretation matter.",
   },
   {
     title: "AI-assisted analysis",
     description:
-      "Designed to support pattern recognition and candidate prioritization.",
-    Icon: BrainCircuit,
+      "Built to support computational methods that help researchers compare, prioritize, and understand molecular candidates.",
   },
   {
     title: "Scalable software",
     description:
-      "Built with a modular structure that can grow with the platform.",
-    Icon: Layers3,
+      "Structured as a modern web platform that can grow as the research, features, and team needs evolve.",
   },
   {
     title: "Research teams",
     description:
-      "Focused on making scientific workflows easier to understand and communicate.",
-    Icon: Users,
+      "Focused on helping scientific teams organize knowledge and communicate decisions more clearly.",
   },
 ];
 
-export function AboutPreview() {
+export function AboutPreview({ content }: AboutPreviewProps) {
+  const section = {
+    ...fallbackContent,
+    ...content,
+  };
+
+  const principles =
+    content?.principles && content.principles.length > 0
+      ? content.principles
+      : fallbackPrinciples;
+
   return (
     <section id="about" className="bg-white py-24">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <FadeIn>
             <SectionHeading
               align="left"
-              eyebrow="About MOLwise"
-              title="Built at the intersection of molecular science, AI, and scalable software."
-              description="MOLwise is being designed to support the next generation of molecular discovery workflows through intelligent computational tools and clear scientific interfaces."
+              eyebrow={section.eyebrow}
+              title={section.title}
+              description={section.description}
             />
 
-            <div className="mt-8 rounded-[2rem] border border-cyan-100 bg-gradient-to-br from-brand-soft to-white p-6 shadow-sm">
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-brand">
-                Design direction
-              </p>
-
-              <p className="mt-4 text-lg leading-8 text-slate-700">
-                The website is structured to communicate scientific credibility,
-                modern technology, and a future-ready platform experience.
-              </p>
-            </div>
+            {section.closingText && (
+              <div className="mt-8 rounded-[2rem] border border-cyan-100 bg-gradient-to-br from-cyan-50 to-white p-6 shadow-sm">
+                <p className="leading-7 text-slate-600">
+                  {section.closingText}
+                </p>
+              </div>
+            )}
           </FadeIn>
 
           <div className="grid gap-5 sm:grid-cols-2">
-            {principles.map((item, index) => {
-              const Icon = item.Icon;
-
-              return (
-                <FadeIn key={item.title} delay={index * 0.08}>
-                  <div className="group relative h-full overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-cyan-200 hover:shadow-xl hover:shadow-cyan-950/10">
-                    <div className="absolute right-0 top-0 h-32 w-32 translate-x-10 -translate-y-10 rounded-full bg-brand-soft opacity-0 blur-2xl transition duration-300 group-hover:opacity-100" />
-
-                    <div className="relative">
-                      <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft text-brand transition duration-300 group-hover:bg-brand group-hover:text-white">
-                        <Icon className="h-7 w-7" />
-                      </div>
-
-                      <h3 className="text-xl font-semibold text-slate-950">
-                        {item.title}
-                      </h3>
-
-                      <p className="mt-4 leading-7 text-slate-600">
-                        {item.description}
-                      </p>
-                    </div>
+            {principles.map((principle, index) => (
+              <FadeIn key={`${principle.title}-${index}`} delay={index * 0.08}>
+                <Card className="h-full p-6">
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-full bg-brand-soft text-sm font-bold text-brand">
+                    {String(index + 1).padStart(2, "0")}
                   </div>
-                </FadeIn>
-              );
-            })}
+
+                  <h3 className="text-xl font-semibold text-slate-950">
+                    {principle.title}
+                  </h3>
+
+                  <p className="mt-3 leading-7 text-slate-600">
+                    {principle.description}
+                  </p>
+                </Card>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </Container>

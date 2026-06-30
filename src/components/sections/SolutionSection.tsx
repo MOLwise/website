@@ -1,37 +1,76 @@
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { solutions } from "@/data/homepage";
+import { solutions as fallbackSolutions } from "@/data/homepage";
 import { Container } from "@/components/ui/Container";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export function SolutionSection() {
+type SolutionStep = {
+  title?: string;
+  description?: string;
+};
+
+type SolutionSectionContent = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  steps?: SolutionStep[];
+  outcomeLabel?: string;
+  outcomeText?: string;
+};
+
+type SolutionSectionProps = {
+  content?: SolutionSectionContent;
+};
+
+const fallbackContent = {
+  eyebrow: "The Solution",
+  title: "A connected platform for intelligent molecular decision-making.",
+  description:
+    "MOLwise brings together molecular data, AI-assisted analysis, and clear research workflows so teams can move from raw information to better scientific decisions.",
+  outcomeLabel: "Outcome",
+  outcomeText:
+    "A clearer research pipeline that helps teams organize molecular evidence, compare candidates, and make decisions with more confidence.",
+};
+
+const fallbackSteps: SolutionStep[] = fallbackSolutions.map((solution) => ({
+  title: solution.title,
+  description: solution.description,
+}));
+
+export function SolutionSection({ content }: SolutionSectionProps) {
+  const section = {
+    ...fallbackContent,
+    ...content,
+  };
+
+  const steps =
+    content?.steps && content.steps.length > 0 ? content.steps : fallbackSteps;
+
   return (
-    <section id="platform" className="bg-white py-24">
+    <section id="platform" className="bg-slate-50 py-24">
       <Container>
         <FadeIn>
           <SectionHeading
-            eyebrow="The MOLwise approach"
-            title="One intelligent workflow for molecular insight."
-            description="MOLwise is designed to bring structure, intelligence, and clarity into early-stage molecular discovery workflows."
+            eyebrow={section.eyebrow}
+            title={section.title}
+            description={section.description}
           />
         </FadeIn>
 
-        <div className="mt-16">
-          <div className="relative grid gap-6 lg:grid-cols-4">
-            <div className="absolute left-0 right-0 top-16 hidden h-px bg-gradient-to-r from-cyan-100 via-cyan-300 to-cyan-100 lg:block" />
+        <div className="relative mt-16">
+          <div className="absolute left-1/2 top-10 hidden h-px w-[76%] -translate-x-1/2 bg-cyan-200 lg:block" />
 
-            {solutions.map((solution, index) => (
-              <FadeIn key={solution.title} delay={index * 0.08}>
-                <div className="group relative h-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-cyan-200 hover:shadow-xl hover:shadow-cyan-950/10">
-                  <div className="absolute -top-5 left-6 flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-white ring-8 ring-white transition duration-300 group-hover:bg-brand">
-                    {index + 1}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {steps.map((solution, index) => (
+              <FadeIn key={`${solution.title}-${index}`} delay={index * 0.08}>
+                <div className="relative h-full rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-cyan-200 hover:shadow-xl hover:shadow-cyan-950/10">
+                  <div className="relative z-10 mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-white">
+                    <span className="text-lg font-bold">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                   </div>
 
-                  <div className="mt-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-soft text-brand transition duration-300 group-hover:bg-brand group-hover:text-white">
-                    <CheckCircle2 className="h-7 w-7" />
-                  </div>
-
-                  <h3 className="mt-6 text-xl font-semibold text-slate-950">
+                  <h3 className="text-xl font-semibold text-slate-950">
                     {solution.title}
                   </h3>
 
@@ -39,10 +78,8 @@ export function SolutionSection() {
                     {solution.description}
                   </p>
 
-                  {index < solutions.length - 1 && (
-                    <div className="absolute -right-3 top-14 hidden h-8 w-8 items-center justify-center rounded-full border border-cyan-100 bg-white text-brand shadow-sm lg:flex">
-                      <ArrowRight className="h-4 w-4" />
-                    </div>
+                  {index < steps.length - 1 && (
+                    <ArrowRight className="absolute -right-5 top-9 hidden h-5 w-5 text-brand lg:block" />
                   )}
                 </div>
               </FadeIn>
@@ -50,16 +87,22 @@ export function SolutionSection() {
           </div>
         </div>
 
-        <FadeIn delay={0.15}>
-          <div className="mt-10 rounded-[2rem] border border-cyan-100 bg-gradient-to-r from-brand-soft to-white p-6 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-brand">
-              Outcome
-            </p>
-            <p className="mx-auto mt-3 max-w-3xl text-lg leading-8 text-slate-700">
-              Instead of scattered analysis steps, MOLwise presents a clearer
-              path from molecular inputs to prioritized candidates and
-              research-ready outputs.
-            </p>
+        <FadeIn delay={0.25}>
+          <div className="mx-auto mt-12 max-w-4xl rounded-[2rem] border border-cyan-100 bg-white p-6 shadow-sm">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-soft text-brand">
+                <CheckCircle2 className="h-6 w-6" />
+              </div>
+
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-brand">
+                  {section.outcomeLabel}
+                </p>
+                <p className="mt-3 leading-7 text-slate-600">
+                  {section.outcomeText}
+                </p>
+              </div>
+            </div>
           </div>
         </FadeIn>
       </Container>

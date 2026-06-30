@@ -89,12 +89,6 @@ export const useCases = [
 
 export const publications = [
   {
-    title: "AI-Guided Molecular Candidate Screening",
-    authors: "MOLwise Research Team",
-    venue: "Placeholder Journal",
-    year: "2026",
-  },
-  {
     title: "Computational Workflows for Molecular Discovery",
     authors: "MOLwise Research Team",
     venue: "Placeholder Conference",
